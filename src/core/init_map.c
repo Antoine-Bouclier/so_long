@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 12:45:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/19 14:38:38 by abouclie         ###   ########.fr       */
+/*   Created: 2025/02/19 15:29:12 by abouclie          #+#    #+#             */
+/*   Updated: 2025/02/19 15:33:57 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static int	check_col()
+void	ft_check_arg(int argc, char **argv, t_game game)
 {
-	
-}
-
-static int	check_line()
-{
-	
-}
-
-static void	ft_check_parameters(t_game game)
-{
-	if (game.map.collectibles <= 0)
-		error_msg("Error! Your map must have at least 1 collectible", game);
-	else if (game.map.exit != 1)
-		error_msg("Error! Your map must have only 1 exit", game);
-	else if (game.map.player != 1)
-		error_msg("Error! Your map must have only 1 player", game);
-}
-
-void	ft_check_map()
-{
-	
+	if (argc > 2)
+		error_msg("Error! Too many argument.", game);
+	else if (argc < 2)
+		error_msg("Error! The map file is missing", game);
+	/* else if (file is not .xpm) */
 }

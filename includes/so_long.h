@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/20 09:02:17 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:47:44 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_image
 
 typedef struct	s_map
 {
-	char	**map;
+	char	**full;
 	int		rows;
 	int		columns;
 	int		collectibles;
@@ -67,6 +67,9 @@ typedef struct	s_game
 
 /* Core */
 void	ft_check_arg(int argc, char **argv, t_game *game);
+
+/* free memory */
+void	ft_free_map(t_game *game);
 
 /* Parsing */
 

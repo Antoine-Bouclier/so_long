@@ -6,7 +6,7 @@
 #    By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 09:07:20 by abouclie          #+#    #+#              #
-#    Updated: 2025/02/20 15:56:46 by abouclie         ###   ########.fr        #
+#    Updated: 2025/02/20 17:46:35 by abouclie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,12 @@ SRCS	=	ft_bzero.c \
 			printf/ft_intlen.c \
 			printf/ft_itoa_base.c \
 			printf/ft_itoa_ptr.c \
-			printf/ft_print_ptr \
-			printf/ft_printf \
-			printf/ft_printnbr \
-			printf/ft_printstr \
-			printf/ft_ptrlen \
-			printf/ft_putstr
+			printf/ft_print_ptr.c \
+			printf/ft_printf.c \
+			printf/ft_printnbr.c \
+			printf/ft_printstr.c \
+			printf/ft_ptrlen.c \
+			printf/ft_putstr.c
 OBJS	=	$(SRCS:.c=.o)
 
 all:	${NAME}

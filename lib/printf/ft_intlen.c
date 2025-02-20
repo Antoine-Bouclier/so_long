@@ -6,13 +6,13 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:49:03 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/20 11:01:03 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:25:19 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int	ft_intlen(long n, int bsize)
+int	ft_intlen(long n, int bsize)
 {
 	int	i;
 

@@ -6,13 +6,13 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:00:18 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/20 11:00:45 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:25:27 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static char	*ft_itoa_ptr(uintptr_t n, char *base)
+char	*ft_itoa_ptr(uintptr_t n, char *base)
 {
 	int			i;
 	int			size;

@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 08:43:53 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/20 11:20:11 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:37:13 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ char	*ft_strccpy(char *line);
 char	*get_next_line(int fd);
 
 /* Printf */
-static int	ft_intlen(long n, int bsize);
 char	*ft_itoa_base(long int n, char *base);
-static char	*ft_itoa_ptr(uintptr_t n, char *base);
-int	ft_print_ptr(unsigned long long n);
-int	ft_printnbr(long int n, char *base);
-int	ft_printstr(char *str);
-int	ft_ptrlen(uintptr_t n);
+char	*ft_itoa_ptr(uintptr_t n, char *base);
+int		ft_intlen(long n, int bsize);
+int		ft_print_ptr(unsigned long long n);
+int		ft_printnbr(long int n, char *base);
+int		ft_printstr(char *str);
+int		ft_ptrlen(uintptr_t n);
+int		ft_printf(const char *str, ...);
 void	ft_putstr(char *str);
-int	ft_printf(const char *str, ...);
 
 #endif

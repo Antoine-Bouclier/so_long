@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 12:45:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/20 11:15:36 by abouclie         ###   ########.fr       */
+/*   Created: 2024/11/12 09:53:53 by abouclie          #+#    #+#             */
+/*   Updated: 2024/11/18 15:53:40 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/so_long.h"
+#include "libft.h"
 
-static void	ft_check_parameters(t_game *game)
+void	ft_bzero(void *s, size_t n)
 {
-	if (game->map.collectibles <= 0)
-		error_msg("Error! Your map must have at least 1 collectible", game);
-	else if (game->map.exit != 1)
-		error_msg("Error! Your map must have only 1 exit", game);
-	else if (game->map.player != 1)
-		error_msg("Error! Your map must have only 1 player", game);
-}
+	unsigned char	*dest;
+	size_t			i;
 
-void	ft_check_map()
-{
-	
+	dest = s;
+	i = 0;
+	while (i++ < n)
+		*dest++ = 0;
 }

@@ -6,15 +6,22 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/19 14:36:13 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/20 09:02:17 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG
 # define SO_LONG
 
-#include "../minilibx-linux/mlx.h"
-#include <stdlib.h>
+# include "../minilibx-linux/mlx.h"
+# include <stdlib.h>
+# include "../lib/libft.h"
+
+# define WALL			'1'
+# define FLOOR			'0'
+# define PLAYER			'P'
+# define EXIT			'E'
+# define COLLECTIBLE	'C'
 
 typedef struct	s_position
 {
@@ -58,9 +65,12 @@ typedef struct	s_game
 
 /* Protoypes */
 
+/* Core */
+void	ft_check_arg(int argc, char **argv, t_game *game);
+
 /* Parsing */
 
 /* Error */
-void	error_msg(char *msg, t_game game);
+void	error_msg(char *msg, t_game *game);
 
 #endif

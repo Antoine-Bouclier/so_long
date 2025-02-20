@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 12:45:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/20 11:15:36 by abouclie         ###   ########.fr       */
+/*   Created: 2025/02/20 11:04:21 by abouclie          #+#    #+#             */
+/*   Updated: 2025/02/20 11:04:36 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/so_long.h"
+#include "../libft.h"
 
-static void	ft_check_parameters(t_game *game)
+int	ft_print_ptr(unsigned long long n)
 {
-	if (game->map.collectibles <= 0)
-		error_msg("Error! Your map must have at least 1 collectible", game);
-	else if (game->map.exit != 1)
-		error_msg("Error! Your map must have only 1 exit", game);
-	else if (game->map.player != 1)
-		error_msg("Error! Your map must have only 1 player", game);
-}
+	int		length;
+	char	*nb;
 
-void	ft_check_map()
-{
-	
+	nb = 0;
+	length = 0;
+	if (!n)
+	{
+		ft_putstr(("(nil)"));
+		return (5);
+	}
+	else if (n == 0)
+		length += write(1, "0", 1);
+	else
+	{
+		length = 2;
+		write(1, "0x", 2);
+		nb = ft_itoa_ptr(n, "0123456789abcdef");
+		length += ft_printstr(nb);
+	}
+	free(nb);
+	return (length);
 }

@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 12:45:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/20 11:15:36 by abouclie         ###   ########.fr       */
+/*   Created: 2025/02/20 08:35:42 by abouclie          #+#    #+#             */
+/*   Updated: 2025/02/20 08:40:33 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/so_long.h"
+#include "libft.h"
 
-static void	ft_check_parameters(t_game *game)
+char	*ft_strjoin(char *s1, char *s2, ssize_t b_read)
 {
-	if (game->map.collectibles <= 0)
-		error_msg("Error! Your map must have at least 1 collectible", game);
-	else if (game->map.exit != 1)
-		error_msg("Error! Your map must have only 1 exit", game);
-	else if (game->map.player != 1)
-		error_msg("Error! Your map must have only 1 player", game);
-}
+	char	*str;
+	char	*res;
+	ssize_t	i;
 
-void	ft_check_map()
-{
-	
+	i = 0;
+	if (!s1)
+		return ((char *)s2);
+	if (!s2)
+		return ((char *)s1);
+	str = malloc(ft_strlen(s1) + b_read + 1);
+	if (!str)
+		return (free(str), NULL);
+	res = str;
+	while (*s1)
+		*str++ = *s1++;
+	while (*s2 && i < b_read)
+	{
+		*str++ = *s2++;
+		i++;
+	}
+	*str = '\0';
+	return (res);
 }

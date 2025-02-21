@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/20 17:47:44 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:10:25 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,22 @@
 
 # include "../minilibx-linux/mlx.h"
 # include <stdlib.h>
+# include <fcntl.h>
 # include "../lib/libft.h"
+
+# define IMG_HEIGHT		'32'
+# define IMG_WIDTH		'32'
 
 # define WALL			'1'
 # define FLOOR			'0'
 # define PLAYER			'P'
 # define EXIT			'E'
 # define COLLECTIBLE	'C'
+
+# define W				'119'
+# define A				'97'
+# define D				'115'
+# define S				'100'
 
 typedef struct	s_position
 {
@@ -72,6 +81,9 @@ void	ft_check_arg(int argc, char **argv, t_game *game);
 void	ft_free_map(t_game *game);
 
 /* Parsing */
+
+/* init map */
+void	file_exists(const char *filename, t_game *game);
 
 /* Error */
 void	error_msg(char *msg, t_game *game);

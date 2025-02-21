@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:25:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/21 08:36:29 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:09:25 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ int	main(int argc, char **argv)
 
 	game = malloc(sizeof(t_game));
 	ft_check_arg(argc, argv, game);
+	file_exists(argv[1], game);
 }

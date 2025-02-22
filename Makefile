@@ -10,11 +10,13 @@ CORE_PATH	= core/
 ERROR_PATH	= error/
 PARS_PATH	= parsing/
 PLAYER_PATH	= player/
+INIT_PATH	= initialization/
 
-CORE		= free_memory.c init_map.c so_long.c
+CORE		= free_memory.c so_long.c
 ERROR		= error.c
 PARSING		= map_checker.c
 PLAYER		= 
+INIT		= ft_check_file.c ft_check_map.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 OBJ			= $(SRC:.c=.o)
@@ -39,4 +41,3 @@ fclean: clean
 	rm -r $(NAME)
 
 re: fclean all
-

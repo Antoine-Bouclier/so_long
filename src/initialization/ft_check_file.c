@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map.c                                         :+:      :+:    :+:   */
+/*   ft_check_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:29:12 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/21 11:11:47 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:36:57 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-#include <stdio.h>
 
 void	ft_check_arg(int argc, char **argv, t_game *game)
 {
@@ -27,14 +26,35 @@ void	ft_check_arg(int argc, char **argv, t_game *game)
 		error_msg("Wrong extension file. It should be .ber", game);
 }
 
-void	file_exists(const char *filename, t_game *game)
+static void	file_exists(const char *filename, t_game *game, int *fd)
+{
+	*fd = open(filename, O_RDONLY);
+	if (*fd < 0)
+	{
+		close(*fd);
+		error_msg("The map cannot be opened.", game);
+	}
+}
+
+static void	file_empty(int fd, t_game *game)
+{
+	int		b_read;
+	char	buf[1];
+
+	b_read = read(fd, buf, 1);
+	if (b_read <= 0)
+	{
+		close(fd);
+		error_msg("The file is empty.", game);
+	}
+}
+
+void	ft_check_file(const char *filename, t_game *game)
 {
 	int	fd;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		close(fd);
-		error_msg("The map cannot be opened.", game);
-	}
+	file_exists(filename, game, &fd);
+	file_empty(fd, game);
+	ft_check_map(fd, game);
+	close(fd);
 }

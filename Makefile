@@ -1,43 +1,63 @@
-CC			= cc
-CFLAGS		= -Werror -Wextra -Wall
-MLX			= -Lminilibx-linux -lmlx_linux -lX11 -lXext
-NAME		= so_long
+GREEN = \033[0;32m
+RESET = \033[0m
 
-SRC_PATH	= src/
-OBJ_PATH	= obj/
+CC		= cc
+RM		= rm -rf
+MKDIR	= mkdir -p
 
-CORE_PATH	= core/
-ERROR_PATH	= error/
-PARS_PATH	= parsing/
-PLAYER_PATH	= player/
-INIT_PATH	= initialization/
+CFLAGS	= -Wall -Wextra -Werror -MMD -MP
 
-CORE		= free_memory.c so_long.c
-ERROR		= error.c
-PARSING		= map_checker.c
-PLAYER		= 
-INIT		= ft_check_file.c ft_check_map.c
+NAME			= so_long
+SRCS			= src/core/free_memory.c src/core/so_long.c \
+				src/error/error.c \
+				src/initialization/ft_check_file.c \
+				src/parsing/init_map.c
 
-SRCS		= $(addprefix $(SRC_PATH), $(SRC))
-OBJ			= $(SRC:.c=.o)
-OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
-INCS		= -I ./includes/
+OBJ_DIR			= obj
+DEP_DIR			= dep
 
-all: $(OBJ_PATH) $(NAME)
+OBJS 			= $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
+DEPS			= $(addprefix $(DEP_DIR)/, $(notdir $(SRCS:.c=.d)))
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(CFLAGS) $(MLX) -c $< -o $@ $(INCS)
+LIBFT			= libft
+HEADER			= includes/so_long.h
+LIBFLAGS		= $(LIBFT)/libft.a
 
-$(OBJ_PATH):
-	mkdir $(OBJ_PATH)
+MLX				= minilibx-linux
+MLX_FLAGS		= -L$(MLX) -lmlx_Linux -lX11 -lXext
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(MLX) $(OBJS) -o $(NAME)
+MAKEFILE		= Makefile
+
+all: $(NAME)
+
+$(NAME): $(OBJS) $(LIBFLAGS) $(MAKEFILE)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFLAGS) $(MLX_FLAGS)
+	@printf "$(NAME)	$(GREEN)[OK]$(RESET)\n"
+
+$(OBJ_DIR)/%.o: src/**/%.c $(MAKEFILE) $(HEADER)
+	@$(MKDIR) $(OBJ_DIR) $(DEP_DIR)
+	@$(CC) $(CFLAGS) -I./includes -c $< -o $@ -MF $(DEP_DIR)/$*.d
+	@printf "Compiling $<\n"
+
+$(LIBFLAGS):
+	@$(MAKE) -C $(LIBFT)
+
+$(MLX_FLAGS):
+	@$(MAKE) -C $(MLX)
 
 clean:
-	rm -rf $(OBJ_PATH)
+	@$(RM) $(OBJ_DIR) $(DEP_DIR)
+	@$(MAKE) -C $(LIBFT) clean
+	@$(MAKE) -C $(MLX) clean
+	@printf "clean	$(GREEN)[OK]$(RESET)\n"
 
 fclean: clean
-	rm -r $(NAME)
+	@$(RM) $(NAME)
+	@$(MAKE) -C $(LIBFT) fclean
+	@printf "fclean	$(GREEN)[OK]$(RESET)\n"
 
-re: fclean all
+re:	fclean all
+
+.PHONY: clean fclean all re
+
+-include $(DEPS)

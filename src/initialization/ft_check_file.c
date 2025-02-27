@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:29:12 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/22 15:36:57 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:45:08 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	file_empty(int fd, t_game *game)
 		close(fd);
 		error_msg("The file is empty.", game);
 	}
+	close(fd);
 }
 
 void	ft_check_file(const char *filename, t_game *game)
@@ -55,6 +56,5 @@ void	ft_check_file(const char *filename, t_game *game)
 
 	file_exists(filename, game, &fd);
 	file_empty(fd, game);
-	ft_check_map(fd, game);
 	close(fd);
 }

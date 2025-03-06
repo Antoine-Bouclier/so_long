@@ -8,10 +8,10 @@ MKDIR	= mkdir -p
 CFLAGS	= -Wall -Wextra -Werror -MMD -MP
 
 NAME			= so_long
-SRCS			= src/core/free_memory.c src/core/so_long.c \
+SRCS			= src/core/so_long.c \
 				src/error/error.c \
-				src/initialization/ft_check_file.c \
-				src/parsing/init_map.c
+				src/initialization/ft_check_file.c src/initialization/ft_check_map.c\
+				src/parsing/init_map.c 
 
 OBJ_DIR			= obj
 DEP_DIR			= dep

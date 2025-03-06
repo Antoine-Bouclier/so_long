@@ -6,13 +6,13 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:16 by abouclie          #+#    #+#             */
-/*   Updated: 2025/02/27 16:27:24 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:10:45 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static void init_map_recursive(int fd, t_game *game, int count)
+static void	init_map_recursive(int fd, t_game *game, int count)
 {
 	char *line;
 	
@@ -30,7 +30,7 @@ static void init_map_recursive(int fd, t_game *game, int count)
 	init_map_recursive(fd, game, count + 1);
 }
 
-static void read_map_lines(int fd, t_game *game, int current_row)
+static void	read_map_lines(int fd, t_game *game, int current_row)
 {
 	if (current_row == game->map.rows)
 		return;
@@ -42,7 +42,7 @@ static void read_map_lines(int fd, t_game *game, int current_row)
 	read_map_lines(fd, game, current_row + 1);
 }
 
-void init_map(const char* filename, t_game *game)
+void	init_map(const char* filename, t_game *game)
 {
 	int	fd;
 	
@@ -54,5 +54,6 @@ void init_map(const char* filename, t_game *game)
 	if (fd == -1)
 		error_msg("The map cannot be opened.", game);
 	read_map_lines(fd, game, 0);
+	ft_check_map(filename, &fd, game);
 	close(fd);
 }

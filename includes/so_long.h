@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/06 13:41:32 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:26:26 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_game
 {
 	int			width;
 	int			height;
+	int			img_width;
+	int			img_height;
 	int			moves;
 	int			game_state;
 	int			error;
@@ -95,5 +97,6 @@ void	error_msg(char *msg, t_game *game);
 /* Parsing */
 void	init_map(const char* filename, t_game *game);
 void	ft_check_map(const char *filename, int *fd, t_game *game);
+void	set_img(t_game *game);
 
 #endif

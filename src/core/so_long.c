@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:25:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/06 15:22:48 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/07 08:35:54 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	win_map(t_game *game)
 	game->width = game->map.columns * 32;
 	game->win = mlx_new_window(game->mlx, game->width, game->height, "so_long");
 	set_img(game);
-	mlx_loop_hook(game->mlx, main_loop, &game);
+	mlx_loop_hook(game->mlx, (int (*)(void*))main_loop, game);
 	mlx_loop(game->mlx);
 }
 
@@ -66,5 +66,7 @@ int	main(int argc, char **argv)
 	ft_check_arg(argc, argv, game);
 	ft_check_file(argv[1], game);
 	init_map(argv[1], game);
+	if (game->map.full == NULL || game->map.rows == 0 || game->map.columns == 0)
+	ft_printf("Erreur : La carte n'est pas correctement initialisée\n");
 	win_map(game);
 }

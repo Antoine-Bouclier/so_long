@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:25:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/07 08:35:54 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/07 10:08:36 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,58 @@ void draw_map(t_game *game)
 	}
 }
 
+void	render_background(t_game *game)
+{
+	int		x;
+	int		y;
+	char	current_char;
+
+	y = 0;
+	while(y < game->map.rows)
+	{
+		x = 0;
+		while (x < game->map.columns)
+		{
+			current_char = game->map.full[y][x];
+			if (current_char == '1')
+				mlx_put_image_to_window(game->mlx, game->win, game->wall_img.xpm_ptr, x * 32, y * 32);
+			else
+				mlx_put_image_to_window(game->mlx, game->win, game->floor_img.xpm_ptr, x * 32, y * 32);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	render(t_game *game)
+{
+	int		x;
+	int		y;
+	char	current_char;
+
+	y = 0;
+	while (y < game->map.rows)
+	{
+		x = 0;
+		while (x < game->map.columns)
+		{
+			current_char =  game->map.full[y][x];
+			if (current_char == 'P')
+				mlx_put_image_to_window(game->mlx, game->win, game->player_img.xpm_ptr, x * 32, y * 32);
+			else if (current_char == 'C')
+				mlx_put_image_to_window(game->mlx, game->win, game->collectible_img.xpm_ptr, x * 32, y * 32);
+			else if (current_char == 'E')
+				mlx_put_image_to_window(game->mlx, game->win, game->exit_img.xpm_ptr, x * 32, y * 32);
+			x++;
+		}
+		y++;
+	}
+}
+
 static int	main_loop(t_game *game)
 {
-	draw_map(game);
+	render_background(game);
+	render(game);
 	return (0);
 }
 

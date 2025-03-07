@@ -1,6 +1,6 @@
 /* XPM */
 static char *link_xpm[] = {
-"32 32 16 1",
+"32 32 9 1",
 "A c #000000",
 "B c #000000",
 "C c #1f8a0a",
@@ -10,13 +10,6 @@ static char *link_xpm[] = {
 "G c #ffffff",
 "H c #e0ac69",
 "I c #000000",
-"J c #000000",
-"K c #000000",
-"L c #000000",
-"M c #000000",
-"N c #000000",
-"O c #000000",
-"P c #000000",,
 "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
 "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
 "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",

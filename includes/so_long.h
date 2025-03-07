@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/06 14:26:26 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/07 13:25:45 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
-# define IMG_HEIGHT		'32'
-# define IMG_WIDTH		'32'
+# define IMG_HEIGHT		32
+# define IMG_WIDTH		32
 
 # define WALL			'1'
 # define FLOOR			'0'
@@ -27,10 +27,10 @@
 # define EXIT			'E'
 # define COLLECTIBLE	'C'
 
-# define W				'119'
-# define A				'97'
-# define D				'115'
-# define S				'100'
+# define W				119
+# define A				97
+# define D				100
+# define S				115
 
 typedef struct	s_position
 {
@@ -80,7 +80,7 @@ typedef struct	s_game
 
 /* Core */
 void	ft_check_arg(int argc, char **argv, t_game *game);
-void	render_game(t_game *game);
+int		key_press(int keycode, t_game *game);
 
 /* free memory */
 void	ft_free_map(t_game *game);

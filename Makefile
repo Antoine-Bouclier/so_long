@@ -8,7 +8,7 @@ MKDIR	= mkdir -p
 CFLAGS	= -Wall -Wextra -Werror -MMD -MP
 
 NAME			= so_long
-SRCS			= src/core/so_long.c \
+SRCS			= src/core/so_long.c src/core/render_move.c\
 				src/error/error.c \
 				src/initialization/ft_check_file.c src/initialization/ft_check_map.c\
 				src/parsing/init_map.c src/parsing/set.c

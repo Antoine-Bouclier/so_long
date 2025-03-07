@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/07 13:25:45 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:12:23 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define A				97
 # define D				100
 # define S				115
+# define ESC			65307
 
 typedef struct	s_position
 {
@@ -51,7 +52,6 @@ typedef struct	s_map
 	int		rows;
 	int		columns;
 	int		collectibles;
-	int		collected;
 	int		exit;
 	int		player;
 }				t_map;

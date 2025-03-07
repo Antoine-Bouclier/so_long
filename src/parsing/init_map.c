@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:16 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/06 13:10:45 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/07 13:29:52 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_map(const char* filename, t_game *game)
 {
 	int	fd;
 	
+	game->moves = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		error_msg("The map cannot be opened.", game);

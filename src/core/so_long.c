@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:25:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/07 13:20:23 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/07 13:57:53 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	main(int argc, char **argv)
 	ft_check_arg(argc, argv, game);
 	ft_check_file(argv[1], game);
 	init_map(argv[1], game);
-	if (game->map.full == NULL || game->map.rows == 0 || game->map.columns == 0)
-	ft_printf("Erreur : La carte n'est pas correctement initialisée\n");
+	ft_printf("collectible: %d", game->map.collectibles);
 	win_map(game);
 }

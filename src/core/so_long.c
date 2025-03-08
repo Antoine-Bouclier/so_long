@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:25:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/07 13:57:53 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:22:13 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 static void	img_to_win(t_game *game, char current_char, int x, int y)
 {
 	if (current_char == PLAYER)
-	{
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img.xpm_ptr, x * 32, y * 32);
-		game->player_img.position.x = x;
-		game->player_img.position.y = y;
-	}
+		mlx_put_image_to_window(game->mlx, game->win, game->player.img.xpm_ptr, x * 32, y * 32);
 	else if (current_char == FLOOR)
 		mlx_put_image_to_window(game->mlx, game->win, game->floor_img.xpm_ptr, x * 32, y * 32);
 	else if (current_char == WALL)
@@ -27,7 +23,7 @@ static void	img_to_win(t_game *game, char current_char, int x, int y)
 	else if (current_char == COLLECTIBLE)
 		mlx_put_image_to_window(game->mlx, game->win, game->collectible_img.xpm_ptr, x * 32, y * 32);
 	else if (current_char == EXIT)
-		mlx_put_image_to_window(game->mlx, game->win, game->exit_img.xpm_ptr, x * 32, y * 32);
+		mlx_put_image_to_window(game->mlx, game->win, game->exit.img.xpm_ptr, x * 32, y * 32);
 }
 
 static void draw_map(t_game *game)
@@ -76,6 +72,7 @@ int	main(int argc, char **argv)
 	ft_check_arg(argc, argv, game);
 	ft_check_file(argv[1], game);
 	init_map(argv[1], game);
-	ft_printf("collectible: %d", game->map.collectibles);
+	if (validate_map(game) == 0)
+		error_msg("Collectible or exit is not accessible.", game);
 	win_map(game);
 }

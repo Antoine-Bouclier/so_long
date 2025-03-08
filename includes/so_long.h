@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/07 14:12:23 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:21:16 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,19 @@ typedef struct	s_image
 {
 	void		*xpm_ptr;
 	char		*img;
-	t_position	position;
 }				t_image;
+
+typedef struct	s_player
+{
+	t_image		img;
+	t_position	position;
+}				t_player;
+
+typedef struct	s_exit
+{
+	t_image		img;
+	t_position	position;
+}				t_exit;
 
 typedef struct	s_map
 {
@@ -68,10 +79,10 @@ typedef struct	s_game
 	int			map_alloc;
 	void		*mlx;
 	void		*win;
-	t_image		player_img;
+	t_player	player;
+	t_exit		exit;
 	t_image		wall_img;
 	t_image		collectible_img;
-	t_image		exit_img;
 	t_image		floor_img;
 	t_map		map;
 }				t_game;
@@ -98,5 +109,6 @@ void	error_msg(char *msg, t_game *game);
 void	init_map(const char* filename, t_game *game);
 void	ft_check_map(const char *filename, int *fd, t_game *game);
 void	set_img(t_game *game);
+int		validate_map(t_game *game);
 
 #endif

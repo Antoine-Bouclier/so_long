@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/08 12:21:16 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/08 13:56:36 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	ft_check_map(const char *filename, int *fd, t_game *game);
 
 /* Error */
 void	error_msg(char *msg, t_game *game);
+void	ft_free_all_memory(t_game *game);
 
 /* Parsing */
 void	init_map(const char* filename, t_game *game);

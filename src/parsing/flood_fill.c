@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 07:41:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/08 12:23:35 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:18:17 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,24 @@ static void	position_player(t_game *game)
 	}
 }
 
-static char	**copy_map(char **original_map, int height)
+static char	**copy_map(char **original_map, int height, int *i)
 {
 	char	**map_copy;
-	int		i;
 
 	map_copy = malloc(sizeof(char *) * (height + 1));
 	if (!map_copy)
 		return (NULL);
-	i = 0;
-	while (i < height) {
-		map_copy[i] = ft_strdup(original_map[i]);
-		if (!map_copy[i]) {
-			while (--i >= 0)
-				free(map_copy[i]);
+	*i = 0;
+	while (*i < height) {
+		map_copy[*i] = ft_strdup(original_map[*i]);
+		if (!map_copy[*i])
+		{
+			while (--*i >= 0)
+				free(map_copy[*i]);
 			free(map_copy);
 			return (NULL);
 		}
-		i++;
+		(*i)++;
 	}
 	map_copy[height] = NULL;
 	return (map_copy);
@@ -83,13 +83,17 @@ int	validate_map(t_game *game)
 {
 	int		exit_found;
 	int		collectible_found;
+	int		i;
 	char	**map;
 
 	exit_found = 0;
 	collectible_found = game->map.collectibles;
-	map = copy_map(game->map.full, game->map.rows);
+	map = copy_map(game->map.full, game->map.rows, &i);
 	position_player(game);
 	flood_fill(map, game->player.position.x, game->player.position.y, &exit_found, &collectible_found);
+	while (--i >= 0)
+		free(map[i]);
+	free(map);
 	if (collectible_found == 0 && exit_found == 1)
 		return (1);
 	else

@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/08 13:56:36 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:20:29 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,11 @@ typedef struct	s_image
 	char		*img;
 }				t_image;
 
-typedef struct	s_player
+typedef struct	s_entity
 {
 	t_image		img;
 	t_position	position;
-}				t_player;
-
-typedef struct	s_exit
-{
-	t_image		img;
-	t_position	position;
-}				t_exit;
+}				t_entity;
 
 typedef struct	s_map
 {
@@ -79,8 +73,8 @@ typedef struct	s_game
 	int			map_alloc;
 	void		*mlx;
 	void		*win;
-	t_player	player;
-	t_exit		exit;
+	t_entity	player;
+	t_entity	exit;
 	t_image		wall_img;
 	t_image		collectible_img;
 	t_image		floor_img;

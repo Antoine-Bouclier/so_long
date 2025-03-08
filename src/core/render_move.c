@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:06:15 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/08 13:57:56 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:03:12 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	exit_game(t_game *game)
 {
 	if (game->map.collectibles == 0)
 	{
-		ft_printf("Well done!\n");
+		ft_printf("You win!\n");
 		ft_free_all_memory(game);
 		exit(0);
 	}
@@ -185,6 +185,9 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == D)
 		move_right(game);
 	else if (keycode == ESC)
+	{
+		ft_free_all_memory(game);
 		exit(0);
+	}
 	return (0);
 }

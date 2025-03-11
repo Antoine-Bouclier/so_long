@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/08 14:20:29 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:15:40 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ typedef struct	s_game
 /* Core */
 void	ft_check_arg(int argc, char **argv, t_game *game);
 int		key_press(int keycode, t_game *game);
+void	move_floor(t_game *game, t_position *current, t_position *next);
+void	move_exit(t_game *game, t_position *current, t_position *next);
+
 
 /* free memory */
 void	ft_free_map(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:06:15 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/08 14:03:12 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:22:06 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,154 +24,120 @@ static void	exit_game(t_game *game)
 
 static void	move_top(t_game *game)
 {
-	int	pos_x;
-	int	pos_y;
+	t_position	current;
+	t_position	next;
 
-	pos_x = game->player.position.x;
-	pos_y = game->player.position.y;
-	if (game->map.full[pos_y - 1][pos_x] != WALL)
+	current.y = game->player.position.y;
+	current.x = game->player.position.x;
+	next.y = game->player.position.y - 1;
+	next.x = game->player.position.x;
+	if (game->map.full[next.y][next.x] != WALL)
 	{
-		if (game->map.full[pos_y - 1][pos_x] != EXIT)
+		if (game->map.full[next.y][next.x] != EXIT)
 		{
-			if (game->map.full[pos_y - 1][pos_x] == COLLECTIBLE)
-				game->map.collectibles--;
-			game->player.position.y--;
-			if (pos_x == game->exit.position.x && pos_y == game->exit.position.y)
-				game->map.full[pos_y][pos_x] = EXIT;
-			else
-				game->map.full[pos_y][pos_x] = FLOOR;
-			game->map.full[pos_y - 1][pos_x] = PLAYER;
-			game->moves++;
-			ft_printf("moves: %d\n", game->moves);
+			move_floor(game, &current, &next);
 		}
 		else
 		{
-			if (game->map.collectibles != 0)
-			{
-				game->player.position.y--;
-				game->map.full[pos_y][pos_x] = FLOOR;
-				game->map.full[pos_y - 1][pos_x] = PLAYER;
-				game->moves++;
-				ft_printf("moves: %d\n", game->moves);
-			}
-			else
-				exit_game(game);
+			move_exit(game, &current, &next);
 		}
 	}
 }
 
 static void	move_left(t_game *game)
 {
-	int	pos_x;
-	int	pos_y;
+	t_position	current;
+	t_position	next;
 
-	pos_x = game->player.position.x;
-	pos_y = game->player.position.y;
-	if (game->map.full[pos_y][pos_x - 1] != WALL)
+	current.y = game->player.position.y;
+	current.x = game->player.position.x;
+	next.y = game->player.position.y;
+	next.x = game->player.position.x - 1;
+	if (game->map.full[next.y][next.x] != WALL)
 	{
-		if (game->map.full[pos_y][pos_x - 1] != EXIT)
+		if (game->map.full[next.y][next.x] != EXIT)
 		{
-			if (game->map.full[pos_y][pos_x - 1] == COLLECTIBLE)
-				game->map.collectibles--;
-			game->player.position.x--;
-			if (pos_x == game->exit.position.x && pos_y == game->exit.position.y)
-				game->map.full[pos_y][pos_x] = EXIT;
-			else
-				game->map.full[pos_y][pos_x] = FLOOR;
-			game->map.full[pos_y][pos_x - 1] = PLAYER;
-			game->moves++;
-			ft_printf("moves: %d\n", game->moves);
+			move_floor(game, &current, &next);
 		}
 		else
 		{
-			if (game->map.collectibles != 0)
-			{
-				game->player.position.x--;
-				game->map.full[pos_y][pos_x] = FLOOR;
-				game->map.full[pos_y][pos_x - 1] = PLAYER;
-				game->moves++;
-				ft_printf("moves: %d\n", game->moves);
-			}
-			else
-				exit_game(game);
+			move_exit(game, &current, &next);
 		}
 	}
 }
 
 static void	move_right(t_game *game)
 {
-	int	pos_x;
-	int	pos_y;
+	t_position	current;
+	t_position	next;
 
-	pos_x = game->player.position.x;
-	pos_y = game->player.position.y;
-	if (game->map.full[pos_y][pos_x + 1] != WALL)
+	current.y = game->player.position.y;
+	current.x = game->player.position.x;
+	next.y = game->player.position.y;
+	next.x = game->player.position.x + 1;
+	if (game->map.full[next.y][next.x] != WALL)
 	{
-		if (game->map.full[pos_y][pos_x + 1] != EXIT)
+		if (game->map.full[next.y][next.x] != EXIT)
 		{
-			if (game->map.full[pos_y][pos_x + 1] == COLLECTIBLE)
-				game->map.collectibles--;
-			game->player.position.x++;
-			if (pos_x == game->exit.position.x && pos_y == game->exit.position.y)
-				game->map.full[pos_y][pos_x] = EXIT;
-			else
-				game->map.full[pos_y][pos_x] = FLOOR;
-			game->map.full[pos_y][pos_x + 1] = PLAYER;
-			game->moves++;
-			ft_printf("moves: %d\n", game->moves);
+			move_floor(game, &current, &next);
 		}
 		else
 		{
-			if (game->map.collectibles != 0)
-			{
-				game->player.position.x++;
-				game->map.full[pos_y][pos_x] = FLOOR;
-				game->map.full[pos_y][pos_x + 1] = PLAYER;
-				game->moves++;
-				ft_printf("moves: %d\n", game->moves);
-			}
-			else
-				exit_game(game);
+			move_exit(game, &current, &next);
 		}
 	}
 }
 
 static void	move_bottom(t_game *game)
 {
-	int	pos_x;
-	int	pos_y;
+	t_position	current;
+	t_position	next;
 
-	pos_x = game->player.position.x;
-	pos_y = game->player.position.y;
-	if (game->map.full[pos_y + 1][pos_x] != WALL)
+	current.y = game->player.position.y;
+	current.x = game->player.position.x;
+	next.y = game->player.position.y + 1;
+	next.x = game->player.position.x;
+	if (game->map.full[next.y][next.x] != WALL)
 	{
-		if (game->map.full[pos_y + 1][pos_x] != EXIT)
+		if (game->map.full[next.y][next.x] != EXIT)
 		{
-			if (game->map.full[pos_y + 1][pos_x] == COLLECTIBLE)
-				game->map.collectibles--;
-			game->player.position.y++;
-			if (pos_x == game->exit.position.x && pos_y == game->exit.position.y)
-				game->map.full[pos_y][pos_x] = EXIT;
-			else
-				game->map.full[pos_y][pos_x] = FLOOR;
-			game->map.full[pos_y + 1][pos_x] = PLAYER;
-			game->moves++;
-			ft_printf("moves: %d\n", game->moves);
+			move_floor(game, &current, &next);
 		}
 		else
 		{
-			if (game->map.collectibles != 0)
-			{
-				game->player.position.y++;
-				game->map.full[pos_y][pos_x] = FLOOR;
-				game->map.full[pos_y + 1][pos_x] = PLAYER;
-				game->moves++;
-				ft_printf("moves: %d\n", game->moves);
-			}
-			else
-				exit_game(game);
+			move_exit(game, &current, &next);
 		}
 	}
+}
+
+void	move_floor(t_game *game, t_position *current, t_position *next)
+{
+	if (game->map.full[next->y][next->x] == COLLECTIBLE)
+		game->map.collectibles--;
+	game->player.position.y = next->y;
+	game->player.position.x = next->x;
+	if (current->x == game->exit.position.x && current->y == game->exit.position.y)
+		game->map.full[current->y][current->x] = EXIT;
+	else
+		game->map.full[current->y][current->x] = FLOOR;
+	game->map.full[next->y][next->x] = PLAYER;
+	game->moves++;
+	ft_printf("moves: %d\n", game->moves);
+}
+
+void	move_exit(t_game *game, t_position *current, t_position *next)
+{
+	if (game->map.collectibles != 0)
+	{
+		game->player.position.y = next->y;
+		game->player.position.x = next->x;
+		game->map.full[current->y][current->x] = FLOOR;
+		game->map.full[next->y][next->x] = PLAYER;
+		game->moves++;
+		ft_printf("moves: %d\n", game->moves);
+	}
+	else
+		exit_game(game);
 }
 
 int	key_press(int keycode, t_game *game)

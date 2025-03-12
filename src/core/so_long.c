@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:25:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/12 10:31:28 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:28:24 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void	win_map(t_game *game)
 	set_img(game);
 	mlx_loop_hook(game->mlx, (int (*)(void *))main_loop, game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
+	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_loop(game->mlx);
 }
 

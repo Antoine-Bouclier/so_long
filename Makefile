@@ -8,7 +8,7 @@ MKDIR	= mkdir -p
 CFLAGS	= -Wall -Wextra -Werror -MMD -MP
 
 NAME			= so_long
-SRCS			= src/core/so_long.c src/core/player_movement.c src/core/movement_actions.c\
+SRCS			= src/core/so_long.c src/core/player_movement.c src/core/movement_actions.c src/core/end.c\
 				src/error/error.c \
 				src/initialization/ft_check_file.c src/initialization/ft_check_map.c\
 				src/parsing/init_map.c src/parsing/set.c src/parsing/flood_fill.c src/parsing/free_memory.c
@@ -24,13 +24,14 @@ HEADER			= includes/so_long.h
 LIBFLAGS		= $(LIBFT)/libft.a
 
 MLX				= minilibx-linux
+MLX_LIB			= $(MLX)/libmlx_Linux.a
 MLX_FLAGS		= -L$(MLX) -lmlx_Linux -lX11 -lXext
 
 MAKEFILE		= Makefile
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFLAGS) $(MAKEFILE)
+$(NAME): $(OBJS) $(LIBFLAGS) $(MLX_LIB) $(MAKEFILE)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFLAGS) $(MLX_FLAGS)
 	@printf "$(NAME)	$(GREEN)[OK]$(RESET)\n"
 
@@ -42,7 +43,7 @@ $(OBJ_DIR)/%.o: src/**/%.c $(MAKEFILE) $(HEADER)
 $(LIBFLAGS):
 	@$(MAKE) -C $(LIBFT)
 
-$(MLX_FLAGS):
+$(MLX_LIB):
 	@$(MAKE) -C $(MLX)
 
 clean:

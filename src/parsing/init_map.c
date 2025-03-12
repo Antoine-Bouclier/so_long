@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:16 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/12 10:10:13 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:22:14 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 static void	init_map_iterative(int fd, t_game *game)
 {
-    char *line;
-    int count = 0;
-
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        free(line);
-        count++;
-    }
-    game->map.rows = count;
-    game->map.full = malloc(count * sizeof(char *));
-    if (!game->map.full)
-        error_msg("Memory allocation failed.", game);
-    close(fd);
+	char	*line;
+	int		count;
+	
+	count = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		free(line);
+		count++;
+	}
+	game->map.rows = count;
+	game->map.full = malloc(count * sizeof(char *));
+	if (!game->map.full)
+		error_msg("Memory allocation failed.", game);
+	close(fd);
 }
 
 

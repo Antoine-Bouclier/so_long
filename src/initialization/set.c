@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:50:55 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/11 14:48:45 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:52:14 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	set_img(t_game *game)
 	game->img_height = IMG_HEIGHT;
 	game->player.img.img = "./assets/sprite/player1.xpm";
 	game->wall_img.img = "./assets/sprite/wall.xpm";
-	game->collectible_img.img = "./assets/sprite/rupee.xpm";
+	game->collectible_img.img = "./assets/sprite/rupee1.xpm";
 	game->floor_img.img = "./assets/sprite/floor.xpm";
 	game->exit.img.img = "./assets/sprite/exit.xpm";
 	game->player.img.xpm_ptr = mlx_xpm_file_to_image(game->mlx,

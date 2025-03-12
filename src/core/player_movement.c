@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_move.c                                      :+:      :+:    :+:   */
+/*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:06:15 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/11 14:37:39 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:29:33 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == D)
 		move_right(game, &current);
 	else if (keycode == ESC)
-	{
-		ft_free_all_memory(game);
-		exit(0);
-	}
+		close_window(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/11 14:40:52 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/12 07:54:41 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,6 @@ int		key_press(int keycode, t_game *game);
 void	move_to_floor(t_game *game, t_position *current, t_position *next);
 void	move_to_exit(t_game *game, t_position *current, t_position *next);
 
-
-/* free memory */
-void	ft_free_map(t_game *game);
-
 /* Parsing */
 
 /* Initialization */
@@ -101,7 +97,10 @@ void	ft_check_map(const char *filename, int *fd, t_game *game);
 
 /* Error */
 void	error_msg(char *msg, t_game *game);
+
+/* Free memory */
 void	ft_free_all_memory(t_game *game);
+void	ft_free_map(t_map *map);
 
 /* Parsing */
 void	init_map(const char* filename, t_game *game);

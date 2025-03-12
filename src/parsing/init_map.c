@@ -6,29 +6,29 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:16 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/08 07:32:55 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:10:13 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static void	init_map_recursive(int fd, t_game *game, int count)
+static void	init_map_iterative(int fd, t_game *game)
 {
-	char *line;
-	
-	line = get_next_line(fd);
-	if (!line)
-	{
-		game->map.rows = count;
-		game->map.full = malloc(count * sizeof(char *));
-		if (!game->map.full)
-			error_msg("Memory allocation failed.", game);
-		close(fd);
-		return;
-	}
-	free(line);
-	init_map_recursive(fd, game, count + 1);
+    char *line;
+    int count = 0;
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        free(line);
+        count++;
+    }
+    game->map.rows = count;
+    game->map.full = malloc(count * sizeof(char *));
+    if (!game->map.full)
+        error_msg("Memory allocation failed.", game);
+    close(fd);
 }
+
 
 static void	read_map_lines(int fd, t_game *game, int current_row)
 {
@@ -50,7 +50,7 @@ void	init_map(const char* filename, t_game *game)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		error_msg("The map cannot be opened.", game);
-	init_map_recursive(fd, game, 0);
+	init_map_iterative(fd, game);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		error_msg("The map cannot be opened.", game);

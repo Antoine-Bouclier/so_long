@@ -11,7 +11,7 @@ NAME			= so_long
 SRCS			= src/core/so_long.c src/core/player_movement.c src/core/movement_actions.c\
 				src/error/error.c \
 				src/initialization/ft_check_file.c src/initialization/ft_check_map.c\
-				src/parsing/init_map.c src/parsing/set.c src/parsing/flood_fill.c
+				src/parsing/init_map.c src/parsing/set.c src/parsing/flood_fill.c src/parsing/free_memory.c
 
 OBJ_DIR			= obj
 DEP_DIR			= dep

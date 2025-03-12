@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:19:38 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/06 13:42:09 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:48:11 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ void	is_valid_line(char *line, int *fd, t_game *game)
 	int	i;
 
 	i = 0;
-	if (line[0] != '1' || line[ft_strlen(line) - 2] != '1')
+	if (line[0] != WALL || line[ft_strlen(line) - 2] != WALL)
 	{
 		close(*fd);
-		error_msg("Your map must be surrounded by walls (is_valid_line)", game);
+		error_msg("Your map must be surrounded by walls", game);
 	}
 	while (line[i] != '\0' && line[i] != '\n')
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'C' &&
-				line[i] != 'E' && line[i] != 'P' && line[i] != '\n')
+		if (line[i] != FLOOR && line[i] != WALL && line[i] != COLLECTIBLE &&
+				line[i] != EXIT && line[i] != PLAYER && line[i] != '\n')
 			{
 				close(*fd);
 				error_msg("Invalid character in map", game);
 			}
-		if (line[i] == 'C')
+		if (line[i] == COLLECTIBLE)
 			game->map.collectibles++;
-		else if (line[i] == 'E')
+		else if (line[i] == EXIT)
 			game->map.exit++;
-		else if (line[i] == 'P')
+		else if (line[i] == PLAYER)
 			game->map.player++;
 		i++;
 	}
@@ -52,8 +52,9 @@ void	is_wall_line(char *line, int *fd, t_game *game)
 	i = 0;
 	while (line[i] != '\n' && line[i] != '\0')
 	{
-		if (line[i] != '1')
+		if (line[i] != WALL)
 		{
+			free(line);
 			close(*fd);
 			error_msg("Your map must be surrounded by walls", game);
 		}
@@ -79,6 +80,7 @@ void	ft_check_map(const char *filename, int *fd, t_game *game)
 			is_wall_line(line, fd, game);
 		else
 			is_valid_line(line, fd, game);
+		free(line);
 		rows++;
 	}
 	if (game->map.collectibles <= 0)

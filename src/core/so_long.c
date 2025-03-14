@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:25:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/12 11:28:24 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:33:54 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	main_loop(t_game *game)
 static void	win_map(t_game *game)
 {
 	game->mlx = mlx_init();
+	check_map_size(game);
 	game->height = game->map.rows * 32;
 	game->width = game->map.columns * 32;
 	game->win = mlx_new_window(game->mlx, game->width, game->height, "so_long");

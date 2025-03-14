@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:19:38 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/12 10:48:11 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:01:13 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	is_valid_line(char *line, int *fd, t_game *game)
 	}
 	while (line[i] != '\0' && line[i] != '\n')
 	{
-		if (line[i] != FLOOR && line[i] != WALL && line[i] != COLLECTIBLE &&
-				line[i] != EXIT && line[i] != PLAYER && line[i] != '\n')
-			{
-				close(*fd);
-				error_msg("Invalid character in map", game);
-			}
+		if (line[i] != FLOOR && line[i] != WALL && line[i] != COLLECTIBLE
+			&& line[i] != EXIT && line[i] != PLAYER && line[i] != '\n')
+		{
+			close(*fd);
+			error_msg("Invalid character in map", game);
+		}
 		if (line[i] == COLLECTIBLE)
 			game->map.collectibles++;
 		else if (line[i] == EXIT)
@@ -38,7 +38,8 @@ void	is_valid_line(char *line, int *fd, t_game *game)
 			game->map.player++;
 		i++;
 	}
-	if (i != game->map.columns && (i != game->map.columns - 1 || line[i - 1] != '\n'))
+	if (i != game->map.columns && (i != game->map.columns - 1
+			|| line[i - 1] != '\n'))
 	{
 		close(*fd);
 		error_msg("All lines must have the same length", game);

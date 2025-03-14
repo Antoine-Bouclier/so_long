@@ -6,33 +6,32 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 07:15:52 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/12 13:22:25 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:56:49 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static void ft_destroy_img(t_game *game)
+static void	ft_destroy_img(t_game *game)
 {
-    if (game->mlx)
-    {
-        if (game->player.img.xpm_ptr)
-            mlx_destroy_image(game->mlx, game->player.img.xpm_ptr);
-        if (game->exit.img.xpm_ptr)
-            mlx_destroy_image(game->mlx, game->exit.img.xpm_ptr);
-        if (game->collectible_img.xpm_ptr)
-            mlx_destroy_image(game->mlx, game->collectible_img.xpm_ptr);
-        if (game->floor_img.xpm_ptr)
-            mlx_destroy_image(game->mlx, game->floor_img.xpm_ptr);
-        if (game->wall_img.xpm_ptr)
-            mlx_destroy_image(game->mlx, game->wall_img.xpm_ptr);
-    }
+	if (game->mlx)
+	{
+		if (game->player.img.xpm_ptr)
+			mlx_destroy_image(game->mlx, game->player.img.xpm_ptr);
+		if (game->exit.img.xpm_ptr)
+			mlx_destroy_image(game->mlx, game->exit.img.xpm_ptr);
+		if (game->collectible_img.xpm_ptr)
+			mlx_destroy_image(game->mlx, game->collectible_img.xpm_ptr);
+		if (game->floor_img.xpm_ptr)
+			mlx_destroy_image(game->mlx, game->floor_img.xpm_ptr);
+		if (game->wall_img.xpm_ptr)
+			mlx_destroy_image(game->mlx, game->wall_img.xpm_ptr);
+	}
 }
-
 
 void	ft_free_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	if (!map || !map->full)
 		return ;

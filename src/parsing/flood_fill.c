@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 07:41:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/12 08:32:58 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:56:00 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	flood_fill(t_map *map, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= map->columns || y >= map->rows)
-        return ;
+		return ;
 	if (map->full[y][x] == WALL || map->full[y][x] == 'V')
 		return ;
 	if (map->full[y][x] == EXIT)
@@ -31,9 +31,9 @@ static void	flood_fill(t_map *map, int x, int y)
 
 static void	position_player(t_game *game)
 {
-	int x;
-	int	y;
-	char current_char;
+	int		x;
+	int		y;
+	char	current_char;
 
 	y = 0;
 	while (y < game->map.rows)
@@ -58,9 +58,9 @@ static void	position_player(t_game *game)
 	}
 }
 
-static t_map *copy_map(char **original_map, int height, int width)
+static t_map	*copy_map(char **original_map, int height, int width)
 {
-	t_map *new_map;
+	t_map	*new_map;
 
 	new_map = malloc(sizeof(t_map));
 	if (!new_map)
@@ -90,7 +90,7 @@ static t_map *copy_map(char **original_map, int height, int width)
 int	validate_map(t_game *game)
 {
 	t_map	*map;
-	int	result;
+	int		result;
 
 	result = 0;
 	map = copy_map(game->map.full, game->map.rows, game->map.columns);

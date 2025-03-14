@@ -40,11 +40,13 @@ $(OBJ_DIR)/%.o: src/**/%.c $(MAKEFILE) $(HEADER)
 	@$(CC) $(CFLAGS) -I./includes -c $< -o $@ -MF $(DEP_DIR)/$*.d
 	@printf "Compiling $<\n"
 
-$(LIBFLAGS):
+$(LIBFLAGS): force
 	@$(MAKE) -C $(LIBFT)
 
 $(MLX_LIB):
 	@$(MAKE) -C $(MLX)
+
+force:
 
 clean:
 	@$(RM) $(OBJ_DIR) $(DEP_DIR)
@@ -59,6 +61,6 @@ fclean: clean
 
 re:	fclean all
 
-.PHONY: clean fclean all re
+.PHONY: clean fclean all re force
 
 -include $(DEPS)

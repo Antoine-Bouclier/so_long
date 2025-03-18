@@ -6,12 +6,21 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:50:55 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/18 10:57:10 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:28:58 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
+/**
+ * @brief Loads and sets up the game images.
+ *
+ * This function initializes the image file paths for various game elements
+ * (player, walls, collectibles, floor, and exit) and loads them into memory
+ * using the MiniLibX function `mlx_xpm_file_to_image`.
+ *
+ * @param game Pointer to the game structure containing graphical resources.
+ */
 void	set_img(t_game *game)
 {
 	game->img_width = IMG_WIDTH;

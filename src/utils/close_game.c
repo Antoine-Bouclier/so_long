@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   close_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 12:45:48 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/06 08:14:34 by abouclie         ###   ########.fr       */
+/*   Created: 2025/03/12 11:27:00 by abouclie          #+#    #+#             */
+/*   Updated: 2025/03/18 09:34:47 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static void	ft_check_parameters(t_game *game)
+int	close_window(t_game *game)
 {
-	if (game->map.collectibles <= 0)
-		error_msg("Error! Your map must have at least 1 collectible", game);
-	else if (game->map.exit != 1)
-		error_msg("Error! Your map must have only 1 exit", game);
-	else if (game->map.player != 1)
-		error_msg("Error! Your map must have only 1 player", game);
+	ft_free_all_memory(game);
+	exit(0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:16 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/14 12:54:54 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:40:13 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ static void	init_map_iterative(int fd, t_game *game)
 	int		count;
 
 	count = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	while (1)
 	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
 		free(line);
 		count++;
 	}
@@ -40,6 +43,7 @@ static void	read_map_lines(int fd, t_game *game, int current_row)
 	if (current_row == 0)
 		game->map.columns = ft_strlen(game->map.full[current_row]) - 1;
 	read_map_lines(fd, game, current_row + 1);
+	close(fd);
 }
 
 void	init_map(const char *filename, t_game *game)

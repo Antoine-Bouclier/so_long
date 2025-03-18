@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set.c                                              :+:      :+:    :+:   */
+/*   set_images.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:50:55 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/17 10:31:03 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:57:10 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	set_img(t_game *game)
 {
 	game->img_width = IMG_WIDTH;
 	game->img_height = IMG_HEIGHT;
-	game->player.img.img = "./assets/sprite/player2.xpm";
+	game->player.img.img = "./assets/sprite/player.xpm";
 	game->wall_img.img = "./assets/sprite/wall.xpm";
-	game->collectible_img.img = "./assets/sprite/rupee1.xpm";
+	game->collectible_img.img = "./assets/sprite/rupee.xpm";
 	game->floor_img.img = "./assets/sprite/floor.xpm";
-	game->exit.img.img = "./assets/sprite/exit_open2.xpm";
+	game->exit.img.img = "./assets/sprite/exit.xpm";
 	game->player.img.xpm_ptr = mlx_xpm_file_to_image(game->mlx,
 			game->player.img.img, &game->img_width, &game->img_height);
 	game->wall_img.xpm_ptr = mlx_xpm_file_to_image(game->mlx,

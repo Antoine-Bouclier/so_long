@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/12 13:20:30 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:41:47 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,31 +84,52 @@ typedef struct	s_game
 /* Protoypes */
 
 /* Core */
-void	ft_check_arg(int argc, char **argv, t_game *game);
-int		key_press(int keycode, t_game *game);
-void	move_to_floor(t_game *game, t_position *current, t_position *next);
-void	move_to_exit(t_game *game, t_position *current, t_position *next);
-void	check_map_size(t_game *game);
-int		close_window(t_game *game);
+int	main(int argc, char **argv);
 
-/* Parsing */
-
-/* Initialization */
-void	ft_check_file(const char *filename, t_game *game);
-void	ft_check_map(const char *filename, int *fd, t_game *game);
-
-/* Error */
-void	error_msg(char *msg, t_game *game);
-
-/* Free memory */
-void	ft_free_all_memory(t_game *game);
-void	ft_free_map(t_map *map);
-void	gnl_cleanup(int fd);
-
-/* Parsing */
-void	init_map(const char* filename, t_game *game);
-void	ft_check_map(const char *filename, int *fd, t_game *game);
+/* Graphics */
+void	win_map(t_game *game);
 void	set_img(t_game *game);
+
+/* Map loader */
+	
+	/* Init map */
+void	init_map(const char *filename, t_game *game);
+
+/* Map validation */
+
+	/* Check file */
+void	ft_check_arg(int argc, char **argv, t_game *game);
+void	ft_check_file(const char *filename, t_game *game);
+
+	/* Check map */
+void	ft_check_map(const char *filename, int *fd, t_game *game);
+void	check_map_size(t_game *game);
+
+	/* Flood fill */
 int		validate_map(t_game *game);
+
+	/* is valid line */
+void	is_valid_line(char *line, int *fd, t_game *game);
+
+/* Player movement */
+
+	/* Movement actions */
+	void	move_to_floor(t_game *game, t_position *current, t_position *next);
+	void	move_to_exit(t_game *game, t_position *current, t_position *next);
+
+	/* Player movement */
+	int	key_press(int keycode, t_game *game);
+
+/* Utils */
+
+	/* Close game */
+	int	close_window(t_game *game);
+
+	/* Error */
+	void	error_msg(char *msg, t_game *game);
+
+	/* Free_memory */
+	void	ft_free_map(t_map *map);
+	void	ft_free_all_memory(t_game *game);
 
 #endif

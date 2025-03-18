@@ -8,10 +8,12 @@ MKDIR	= mkdir -p
 CFLAGS	= -Wall -Wextra -Werror -MMD -MP
 
 NAME			= so_long
-SRCS			= src/core/so_long.c src/core/player_movement.c src/core/movement_actions.c src/core/end.c\
-				src/error/error.c \
-				src/initialization/ft_check_file.c src/initialization/ft_check_map.c\
-				src/parsing/init_map.c src/parsing/set.c src/parsing/flood_fill.c src/parsing/free_memory.c
+SRCS			= src/core/so_long.c\
+				src/graphics/render_map.c src/graphics/set_images.c\
+				src/map_loader/init_map.c\
+				src/map_validation/check_map.c src/map_validation/is_valid_line.c src/map_validation/check_file.c src/map_validation/flood_fill.c\
+				src/player_movement/movement_actions.c src/player_movement/player_movement.c\
+				src/utils/close_game.c src/utils/error.c src/utils/free_memory.c
 
 OBJ_DIR			= obj
 DEP_DIR			= dep

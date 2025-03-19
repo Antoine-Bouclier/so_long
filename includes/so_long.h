@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/19 08:56:24 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:19:58 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_game
 	void		*win;
 	t_entity	player;
 	t_entity	exit;
+	t_image		player_on_exit;
 	t_image		wall_img;
 	t_image		collectible_img;
 	t_image		floor_img;

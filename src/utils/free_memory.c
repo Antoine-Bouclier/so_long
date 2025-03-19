@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 07:15:52 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/19 07:07:52 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:37:33 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	ft_destroy_img(t_game *game)
 			mlx_destroy_image(game->mlx, game->floor_img.xpm_ptr);
 		if (game->wall_img.xpm_ptr)
 			mlx_destroy_image(game->mlx, game->wall_img.xpm_ptr);
+		if (game->player_on_exit.xpm_ptr)
+			mlx_destroy_image(game->mlx, game->player_on_exit.xpm_ptr);
 	}
 }
 

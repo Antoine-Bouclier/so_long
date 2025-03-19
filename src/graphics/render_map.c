@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:42:45 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/19 07:15:09 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:35:42 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@
 static void	img_to_win(t_game *game, char current_char, int x, int y)
 {
 	if (current_char == PLAYER)
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->player.img.xpm_ptr, x * 32, y * 32);
+	{
+		if (y == game->exit.position.y && x == game->exit.position.x)
+			mlx_put_image_to_window(game->mlx, game->win,
+				game->player_on_exit.xpm_ptr, x * 32, y * 32);
+		else
+			mlx_put_image_to_window(game->mlx, game->win,
+				game->player.img.xpm_ptr, x * 32, y * 32);
+	}
 	else if (current_char == FLOOR)
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->floor_img.xpm_ptr, x * 32, y * 32);
@@ -110,10 +116,14 @@ static int	main_loop(t_game *game)
 void	win_map(t_game *game)
 {
 	game->mlx = mlx_init();
+	if (!game->mlx)
+		error_msg("mlx_init failed.", game);
 	check_map_size(game);
 	game->height = game->map.rows * 32;
 	game->width = game->map.columns * 32;
 	game->win = mlx_new_window(game->mlx, game->width, game->height, "so_long");
+	if (!game->win)
+		error_msg("mlx_new_window failed.", game);
 	set_img(game);
 	mlx_loop_hook(game->mlx, (int (*)(void *))main_loop, game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);

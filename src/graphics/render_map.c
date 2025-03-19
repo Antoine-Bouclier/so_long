@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:42:45 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/18 12:28:14 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 07:15:09 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 /**
  * @brief Displays an image in the window based on the map character.
  *
- * This function places the appropriate image at coordinates (x, y) in the window
- * based on the character representing a game element (player, wall, floor, etc.).
+ * This function places the appropriate image at coordinates
+ * (x, y) in the window
+ * based on the character representing a game element
+ * (player, wall, floor, etc.).
  *
- * @param game Pointer to the game structure containing graphical resources.
- * @param current_char Character representing the element to be displayed.
- * @param x X-coordinate (column) where the image should be displayed.
+ * @param game Pointer to the game structure containing
+ * graphical resources.
+ * @param current_char Character representing the element
+ * to be displayed.
+ * @param x X-coordinate (column) where the image should
+ * be displayed.
  * @param y Y-coordinate (row) where the image should be displayed.
  */
 static void	img_to_win(t_game *game, char current_char, int x, int y)
@@ -43,12 +48,16 @@ static void	img_to_win(t_game *game, char current_char, int x, int y)
 }
 
 /**
- * @brief Draws the game map by placing the appropriate images in the window.
+ * @brief Draws the game map by placing the appropriate
+ * images in the window.
  *
- * This function iterates through the game map and calls `img_to_win` to display
- * the corresponding image for each map character at its respective position.
+ * This function iterates through the game map and calls
+ * `img_to_win` to display
+ * the corresponding image for each map character at its
+ * respective position.
  *
- * @param game Pointer to the game structure containing the map and graphical resources.
+ * @param game Pointer to the game structure containing
+ * the map and graphical resources.
  */
 static void	draw_map(t_game *game)
 {
@@ -73,9 +82,11 @@ static void	draw_map(t_game *game)
 /**
  * @brief Main game loop function.
  *
- * This function is called continuously to update the game window by redrawing the map.
+ * This function is called continuously to update the
+ * game window by redrawing the map.
  *
- * @param game Pointer to the game structure containing the map and graphical resources.
+ * @param game Pointer to the game structure containing
+ * the map and graphical resources.
  * @return Always returns 0.
  */
 static int	main_loop(t_game *game)
@@ -87,11 +98,14 @@ static int	main_loop(t_game *game)
 /**
  * @brief Initializes and displays the game window.
  *
- * This function sets up the game window, initializes graphical resources, and 
- * registers event hooks for key presses and window closing. It then enters the 
+ * This function sets up the game window, initializes
+ * graphical resources, and 
+ * registers event hooks for key presses and window closing.
+ * It then enters the 
  * main event loop.
  *
- * @param game Pointer to the game structure containing the map and graphical resources.
+ * @param game Pointer to the game structure containing
+ * the map and graphical resources.
  */
 void	win_map(t_game *game)
 {

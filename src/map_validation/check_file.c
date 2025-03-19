@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:29:12 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/18 13:09:30 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 07:13:28 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 /**
  * @brief Checks the command line arguments for map validation.
  *
- * This function checks if the correct number of arguments is provided and ensures that 
- * the map file has the correct `.ber` extension. If any of these checks fail, 
+ * This function checks if the correct number of
+ * arguments is provided and ensures that 
+ * the map file has the correct `.ber` extension.
+ * If any of these checks fail, 
  * an error message is displayed.
  *
  * @param argc The number of command line arguments.
@@ -40,13 +42,16 @@ void	ft_check_arg(int argc, char **argv, t_game *game)
 /**
  * @brief Checks if the specified file exists and can be opened.
  *
- * This function attempts to open the file in read-only mode. If the file cannot 
- * be opened (i.e., the file does not exist or there is an error), it closes the 
+ * This function attempts to open the file in
+ * read-only mode. If the file cannot 
+ * be opened (i.e., the file does not exist or
+ * there is an error), it closes the 
  * file descriptor and displays an error message.
  *
  * @param filename The path to the map file.
  * @param game Pointer to the game structure used for error handling.
- * @param fd Pointer to an integer that will hold the file descriptor if the file is successfully opened.
+ * @param fd Pointer to an integer that will hold the file descriptor
+ * if the file is successfully opened.
  */
 static void	file_exists(const char *filename, t_game *game, int *fd)
 {
@@ -61,8 +66,10 @@ static void	file_exists(const char *filename, t_game *game, int *fd)
 /**
  * @brief Checks if the specified file is empty.
  *
- * This function reads the first byte of the file. If the file is empty or cannot be read,
- * it closes the file descriptor and displays an error message indicating that the file is empty.
+ * This function reads the first byte of the file. If the
+ * file is empty or cannot be read,
+ * it closes the file descriptor and displays an error message
+ * indicating that the file is empty.
  *
  * @param fd The file descriptor of the file to check.
  * @param game Pointer to the game structure used for error handling.
@@ -84,8 +91,10 @@ static void	file_empty(int fd, t_game *game)
 /**
  * @brief Checks the validity of the specified file.
  *
- * This function checks if the file exists and can be opened, then checks if the file is empty.
- * If any of these checks fail, an error message is displayed. The file descriptor is closed 
+ * This function checks if the file exists and can be
+ * opened, then checks if the file is empty.
+ * If any of these checks fail, an error message is
+ * displayed. The file descriptor is closed 
  * after the checks are completed.
  *
  * @param filename The path to the file to be checked.

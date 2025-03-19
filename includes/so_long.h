@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/19 08:54:58 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 08:56:24 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define SO_LONG_H
 
 # include "../minilibx-linux/mlx.h"
+# include "../libft/libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
 
 # define IMG_HEIGHT		32
 # define IMG_WIDTH		32

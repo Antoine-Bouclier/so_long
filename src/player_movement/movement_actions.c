@@ -6,11 +6,66 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:35:05 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/19 07:10:56 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/28 11:17:40 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/so_long.h"
+#include "so_long.h"
+
+static void	remove_collectible(t_collectible **collectibles,
+	t_position *pos, int *count)
+{
+	t_collectible	*current;
+	t_collectible	*prev;
+
+	if (!collectibles || !(*collectibles))
+		return ;
+	current = *collectibles;
+	prev = NULL;
+	while (current)
+	{
+		if (current->position.x == pos->x && current->position.y == pos->y)
+		{
+			if (prev)
+				prev->next = current->next;
+			else
+				*collectibles = current->next;
+			free(current);
+			(*count)--;
+			return ;
+		}
+		prev = current;
+		current = current->next;
+	}
+}
+
+static void	move_to_rock(t_game *game, t_position *current, t_position *next)
+{
+	t_position	rock_next_pos;
+
+	if (game->map.full[next->y][next->x] == ROCK)
+	{
+		rock_next_pos.x = next->x + next->x - current->x;
+		rock_next_pos.y = next->y + next->y - current->y;
+		if (game->map.full[rock_next_pos.y][rock_next_pos.x] == FLOOR)
+		{
+			game->map.full[rock_next_pos.y][rock_next_pos.x] = ROCK;
+			game->map.full[next->y][next->x] = FLOOR;
+		}
+		else
+			return ;
+	}
+}
+
+static void	move_to_heart(t_game *game, t_position *next)
+{
+	if (game->map.full[next->y][next->x] == HEART)
+	{
+		game->map.heart_collected++;
+		game->map.heart--;
+		ft_printf("heart: %d\n", game->map.heart_collected);
+	}
+}
 
 /**
  * @brief Moves the player to a new position
@@ -34,17 +89,25 @@
 void	move_to_floor(t_game *game, t_position *current, t_position *next)
 {
 	if (game->map.full[next->y][next->x] == COLLECTIBLE)
-		game->map.collectibles--;
-	game->player.position.y = next->y;
-	game->player.position.x = next->x;
-	if (current->x == game->exit.position.x
-		&& current->y == game->exit.position.y)
-		game->map.full[current->y][current->x] = EXIT;
-	else
-		game->map.full[current->y][current->x] = FLOOR;
-	game->map.full[next->y][next->x] = PLAYER;
-	game->moves++;
-	ft_printf("moves: %d\n", game->moves);
+		remove_collectible(&game->collectibles, next, &game->map.collectibles);
+	if (game->map.full[next->y][next->x] == HEART)
+		remove_collectible(&game->hearts, next, &game->map.heart);
+	move_to_rock(game, current, next);
+	move_to_heart(game, next);
+	if (game->map.full[next->y][next->x] != WALL && game->map.full
+		[next->y][next->x] != ROCK)
+	{
+		game->player_pos.y = next->y;
+		game->player_pos.x = next->x;
+		if (current->x == game->exit_pos.x
+			&& current->y == game->exit_pos.y)
+			game->map.full[current->y][current->x] = EXIT;
+		else
+			game->map.full[current->y][current->x] = FLOOR;
+		game->map.full[next->y][next->x] = PLAYER;
+		game->moves++;
+		ft_printf("moves: %d\n", game->moves);
+	}
 }
 
 /**
@@ -70,8 +133,8 @@ void	move_to_exit(t_game *game, t_position *current, t_position *next)
 {
 	if (game->map.collectibles != 0)
 	{
-		game->player.position.y = next->y;
-		game->player.position.x = next->x;
+		game->player_pos.y = next->y;
+		game->player_pos.x = next->x;
 		game->map.full[current->y][current->x] = FLOOR;
 		game->map.full[next->y][next->x] = PLAYER;
 		game->moves++;

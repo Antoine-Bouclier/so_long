@@ -6,11 +6,11 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:12:16 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/19 07:14:13 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/28 07:04:08 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/so_long.h"
+#include "so_long.h"
 
 /**
  * @brief Initializes the game map by counting rows

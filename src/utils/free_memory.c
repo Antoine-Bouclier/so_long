@@ -6,46 +6,11 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 07:15:52 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/19 12:37:33 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/28 10:54:23 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/so_long.h"
-
-/**
- * @brief Frees and destroys the images used in the game.
- *
- * This function is responsible for cleaning up the images
- * used in the game by destroying them 
- * using `mlx_destroy_image` for each image pointer. It ensures
- * that resources are properly freed 
- * to prevent memory leaks when the game is closed or reset.
- *
- * It checks if the `mlx` object and each individual image
- * pointer are not NULL before attempting 
- * to destroy them.
- *
- * @param game Pointer to the game structure containing
- * the images to be destroyed.
- */
-static void	ft_destroy_img(t_game *game)
-{
-	if (game->mlx)
-	{
-		if (game->player.img.xpm_ptr)
-			mlx_destroy_image(game->mlx, game->player.img.xpm_ptr);
-		if (game->exit.img.xpm_ptr)
-			mlx_destroy_image(game->mlx, game->exit.img.xpm_ptr);
-		if (game->collectible_img.xpm_ptr)
-			mlx_destroy_image(game->mlx, game->collectible_img.xpm_ptr);
-		if (game->floor_img.xpm_ptr)
-			mlx_destroy_image(game->mlx, game->floor_img.xpm_ptr);
-		if (game->wall_img.xpm_ptr)
-			mlx_destroy_image(game->mlx, game->wall_img.xpm_ptr);
-		if (game->player_on_exit.xpm_ptr)
-			mlx_destroy_image(game->mlx, game->player_on_exit.xpm_ptr);
-	}
-}
+#include "so_long.h"
 
 /**
  * @brief Frees the memory allocated for the map structure.
@@ -79,6 +44,42 @@ void	ft_free_map(t_map *map)
 	map->columns = 0;
 }
 
+static void	ft_free_monster(t_enemy_list *enemy)
+{
+	t_enemy_list	*current;
+	t_enemy_list	*next;
+
+	current = enemy;
+	while (current)
+	{
+		next = current->next;
+		free(current->monster);
+		free(current->projectile);
+		free(current);
+		current = next;
+	}
+}
+
+static void	ft_free_collectible(t_collectible *collectible)
+{
+	t_collectible	*current;
+	t_collectible	*next;
+
+	current = collectible;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}
+
+void	ft_free_projectile(t_enemy_list *monster)
+{
+	free(monster->projectile);
+	monster->projectile = NULL;
+}
+
 /**
  * @brief Frees all allocated memory and cleans up resources.
  *
@@ -107,6 +108,9 @@ void	ft_free_all_memory(t_game *game)
 		return ;
 	ft_destroy_img(game);
 	ft_free_map(&(game->map));
+	ft_free_monster(game->enemy);
+	ft_free_collectible(game->collectibles);
+	ft_free_collectible(game->hearts);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)

@@ -9,11 +9,12 @@ CFLAGS	= -Wall -Wextra -Werror -MMD -MP
 
 NAME			= so_long
 SRCS			= src/core/so_long.c\
-				src/graphics/render_map.c src/graphics/set_images.c\
+				src/graphics/render_map.c src/graphics/set_images.c src/graphics/render_map_bonus.c src/graphics/set_image_bonus.c\
 				src/map_loader/init_map.c\
-				src/map_validation/check_map.c src/map_validation/is_valid_line.c src/map_validation/check_file.c src/map_validation/flood_fill.c\
-				src/player_movement/movement_actions.c src/player_movement/player_movement.c\
-				src/utils/close_game.c src/utils/error.c src/utils/free_memory.c
+				src/map_validation/add_collectible.c src/map_validation/check_map.c src/map_validation/is_valid_line.c src/map_validation/check_file.c src/map_validation/flood_fill.c\
+				src/player_movement/movement_actions.c src/player_movement/player_movement.c src/player_movement/utils.c\
+				src/utils/close_game.c src/utils/error.c src/utils/free_memory.c src/utils/mlx_destroy_img.c\
+				src/monster/projectile.c src/monster/monster.c src/monster/update_projectile.c
 
 OBJ_DIR			= obj
 DEP_DIR			= dep
@@ -39,7 +40,7 @@ $(NAME): $(OBJS) $(LIBFLAGS) $(MLX_LIB) $(MAKEFILE)
 
 $(OBJ_DIR)/%.o: src/**/%.c $(MAKEFILE) $(HEADER)
 	@$(MKDIR) $(OBJ_DIR) $(DEP_DIR)
-	@$(CC) $(CFLAGS) -I./includes -c $< -o $@ -MF $(DEP_DIR)/$*.d
+	@$(CC) $(CFLAGS) -I./includes -I$(LIBFT) -I$(MLX) -c $< -o $@ -MF $(DEP_DIR)/$*.d
 	@printf "Compiling $<\n"
 
 $(LIBFLAGS): force

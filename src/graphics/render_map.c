@@ -6,11 +6,11 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:42:45 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/28 10:00:04 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:35:42 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../../includes/so_long.h"
 
 /**
  * @brief Displays an image in the window based on the map character.
@@ -32,49 +32,25 @@ static void	img_to_win(t_game *game, char current_char, int x, int y)
 {
 	if (current_char == PLAYER)
 	{
-		if (y == game->exit_pos.y && x == game->exit_pos.x)
+		if (y == game->exit.position.y && x == game->exit.position.x)
 			mlx_put_image_to_window(game->mlx, game->win,
-				game->images.player_on_exit.xpm_ptr, x * 32, y * 32);
+				game->player_on_exit.xpm_ptr, x * 32, y * 32);
 		else
 			mlx_put_image_to_window(game->mlx, game->win,
-				game->images.player.xpm_ptr, x * 32, y * 32);
+				game->player.img.xpm_ptr, x * 32, y * 32);
 	}
 	else if (current_char == FLOOR)
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->images.floor.xpm_ptr, x * 32, y * 32);
+			game->floor_img.xpm_ptr, x * 32, y * 32);
 	else if (current_char == WALL)
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->images.wall.xpm_ptr, x * 32, y * 32);
+			game->wall_img.xpm_ptr, x * 32, y * 32);
 	else if (current_char == COLLECTIBLE)
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->images.collectible.xpm_ptr, x * 32, y * 32);
+			game->collectible_img.xpm_ptr, x * 32, y * 32);
 	else if (current_char == EXIT)
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->images.exit.xpm_ptr, x * 32, y * 32);
-	else
-		img_to_win_bonus(game, current_char, x, y);
-}
-
-static void	draw_first_line(t_game *game, t_position *pos, char current_char)
-{
-	int	i;
-
-	i = 0;
-	while (pos->x < game->map.columns)
-	{
-		if (i < game->map.heart_collected && pos->x >= 2)
-		{
-			mlx_put_image_to_window(game->mlx, game
-				->win, game->images.heart_wall.xpm_ptr, pos
-				->x * 32, pos->y * 32);
-			i++;
-		}
-		else
-			img_to_win(game, current_char, pos->x, pos->y);
-		current_char = game->map.full[pos->y][pos->x];
-		pos->x++;
-	}
-	pos->y++;
+			game->exit.img.xpm_ptr, x * 32, y * 32);
 }
 
 /**
@@ -91,24 +67,21 @@ static void	draw_first_line(t_game *game, t_position *pos, char current_char)
  */
 static void	draw_map(t_game *game)
 {
-	t_position	pos;
-	char		current_char;
+	int		x;
+	int		y;
+	char	current_char;
 
-	pos.y = 0;
-	while (pos.y < game->map.rows)
+	y = 0;
+	while (y < game->map.rows)
 	{
-		pos.x = 0;
-		current_char = game->map.full[pos.y][pos.x];
-		if (pos.y == 0)
-			draw_first_line(game, &pos, current_char);
-		pos.x = 0;
-		while (pos.x < game->map.columns)
+		x = 0;
+		while (x < game->map.columns)
 		{
-			current_char = game->map.full[pos.y][pos.x];
-			img_to_win(game, current_char, pos.x, pos.y);
-			pos.x++;
+			current_char = game->map.full[y][x];
+			img_to_win(game, current_char, x, y);
+			x++;
 		}
-		pos.y++;
+		y++;
 	}
 }
 
@@ -124,25 +97,7 @@ static void	draw_map(t_game *game)
  */
 static int	main_loop(t_game *game)
 {
-	static int	frame_counter = 0;
-	char		*move_count;
-	char		*display_text;
-
-	frame_counter++;
-	if (frame_counter >= 300)
-	{
-		frame_counter = 0;
-		handle_projectile(game);
-	}
 	draw_map(game);
-	move_count = ft_itoa(game->moves);
-	display_text = ft_strjoin("Moves: ", move_count);
-	free(move_count);
-	mlx_string_put(game->mlx, game->win, 10, 20, 0xF4EDDE, display_text);
-	mlx_string_put(game->mlx, game->win, 11, 20, 0xF4EDDE, display_text);
-	mlx_string_put(game->mlx, game->win, 10, 21, 0xF4EDDE, display_text);
-	mlx_string_put(game->mlx, game->win, 11, 21, 0xF4EDDE, display_text);
-	free(display_text);
 	return (0);
 }
 

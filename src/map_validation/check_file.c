@@ -6,11 +6,11 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:29:12 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/28 07:04:05 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 07:13:28 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../../includes/so_long.h"
 
 /**
  * @brief Checks the command line arguments for map validation.

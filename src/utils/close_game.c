@@ -6,11 +6,11 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:27:00 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/28 07:03:25 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 07:08:19 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../../includes/so_long.h"
 
 /**
  * @brief Closes the game window and frees all allocated memory.

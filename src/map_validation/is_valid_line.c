@@ -6,11 +6,11 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 08:30:10 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/28 07:03:51 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:54:20 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../../includes/so_long.h"
 
 /**
  * @brief Validates that the given line is surrounded by walls.
@@ -64,8 +64,7 @@ static void	validate_line_characters(char *line, int *fd, t_game *game)
 	while (line[i] != '\0' && line[i] != '\n')
 	{
 		if (line[i] != FLOOR && line[i] != WALL && line[i] != COLLECTIBLE
-			&& line[i] != EXIT && line[i] != PLAYER && line[i] != '\n'
-			&& line[i] != MONSTER && line[i] != ROCK && line[i] != HEART)
+			&& line[i] != EXIT && line[i] != PLAYER && line[i] != '\n')
 		{
 			close(*fd);
 			free(line);
@@ -75,8 +74,6 @@ static void	validate_line_characters(char *line, int *fd, t_game *game)
 			game->map.collectibles++;
 		else if (line[i] == EXIT)
 			game->map.exit++;
-		else if (line[i] == HEART)
-			game->map.heart++;
 		else if (line[i] == PLAYER)
 			game->map.player++;
 		i++;

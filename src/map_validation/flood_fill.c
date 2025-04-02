@@ -6,11 +6,11 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 07:41:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/28 09:43:17 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/03/19 14:01:09 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../../includes/so_long.h"
 
 /**
  * @brief Recursively performs a flood fill to
@@ -42,8 +42,7 @@ static void	flood_fill(t_map *map, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= map->columns || y >= map->rows)
 		return ;
-	if (map->full[y][x] == WALL || map->full[y][x] == 'V'
-		|| map->full[y][x] == MONSTER || map->full[y][x] == ROCK)
+	if (map->full[y][x] == WALL || map->full[y][x] == 'V')
 		return ;
 	if (map->full[y][x] == EXIT)
 		map->exit = 1;
@@ -54,20 +53,6 @@ static void	flood_fill(t_map *map, int x, int y)
 	flood_fill(map, x - 1, y);
 	flood_fill(map, x, y + 1);
 	flood_fill(map, x, y - 1);
-}
-
-static void	add_pos(t_game *game, char current_char, t_position pos)
-{
-	if (current_char == PLAYER)
-	{
-		game->player_pos.x = pos.x;
-		game->player_pos.y = pos.y;
-	}
-	if (current_char == EXIT)
-	{
-		game->exit_pos.x = pos.x;
-		game->exit_pos.y = pos.y;
-	}
 }
 
 /**
@@ -83,25 +68,32 @@ static void	add_pos(t_game *game, char current_char, t_position pos)
  * @param game Pointer to the game structure that
  * contains the map and player/exit information.
  */
-static void	position(t_game *game)
+static void	position_player(t_game *game)
 {
-	t_position	pos;
-	char		current_char;
+	int		x;
+	int		y;
+	char	current_char;
 
-	pos.y = 0;
-	while (pos.y < game->map.rows)
+	y = 0;
+	while (y < game->map.rows)
 	{
-		pos.x = 0;
-		while (pos.x < game->map.columns)
+		x = 0;
+		while (x < game->map.columns)
 		{
-			current_char = game->map.full[pos.y][pos.x];
-			add_pos(game, current_char, pos);
-			add_collectible(game, pos.y, pos.x, current_char);
-			add_heart(game, pos.y, pos.x, current_char);
-			add_monsters(game, pos.y, pos.x, current_char);
-			pos.x++;
+			current_char = game->map.full[y][x];
+			if (current_char == PLAYER)
+			{
+				game->player.position.x = x;
+				game->player.position.y = y;
+			}
+			if (current_char == EXIT)
+			{
+				game->exit.position.x = x;
+				game->exit.position.y = y;
+			}
+			x++;
 		}
-		pos.y++;
+		y++;
 	}
 }
 
@@ -184,8 +176,8 @@ int	validate_map(t_game *game)
 		return (result);
 	map->exit = 0;
 	map->collectibles = game->map.collectibles;
-	position(game);
-	flood_fill(map, game->player_pos.x, game->player_pos.y);
+	position_player(game);
+	flood_fill(map, game->player.position.x, game->player.position.y);
 	if (map->collectibles == 0 && map->exit == 1)
 		result = 1;
 	ft_free_map(map);

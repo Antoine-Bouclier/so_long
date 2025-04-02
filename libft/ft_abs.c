@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 05:36:07 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/26 05:36:42 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/02 08:17:45 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	ft_abs(int x)
 {
 	if (x < 0)
-		return -x;
-	return x;
+		return (-x);
+	return (x);
 }

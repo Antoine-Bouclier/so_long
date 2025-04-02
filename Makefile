@@ -1,69 +1,108 @@
-GREEN = \033[0;32m
-RESET = \033[0m
+NAME            = so_long
+NAME_BONUS      = so_long_bonus
 
-CC		= cc
-RM		= rm -rf
-MKDIR	= mkdir -p
+GREEN           = \033[0;32m
+RED             = \033[0;31m
+RESET           = \033[0m
 
-CFLAGS	= -Wall -Wextra -Werror -MMD -MP
+LIBFT           = ./libft/libft.a
 
-NAME			= so_long
-SRCS			= src/core/so_long.c\
-				src/graphics/render_map.c src/graphics/set_images.c src/graphics/render_map_bonus.c src/graphics/set_image_bonus.c\
-				src/map_loader/init_map.c\
-				src/map_validation/add_collectible.c src/map_validation/check_map.c src/map_validation/is_valid_line.c src/map_validation/check_file.c src/map_validation/flood_fill.c\
-				src/player_movement/movement_actions.c src/player_movement/player_movement.c src/player_movement/utils.c\
-				src/utils/close_game.c src/utils/error.c src/utils/free_memory.c src/utils/mlx_destroy_img.c\
-				src/monster/projectile.c src/monster/monster.c src/monster/update_projectile.c
+CC              = cc
 
-OBJ_DIR			= obj
-DEP_DIR			= dep
+STANDARD_FLAGS  = -Wall -Werror -Wextra -MMD -MP
+MINILIBX_FLAGS  = -lmlx -lXext -lX11 -Lminilibx-linux
 
-OBJS 			= $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
-DEPS			= $(addprefix $(DEP_DIR)/, $(notdir $(SRCS:.c=.d)))
+REMOVE          = rm -f
 
-LIBFT			= libft
-HEADER			= includes/so_long.h
-LIBFLAGS		= $(LIBFT)/libft.a
+SRCS_DIR        = ./src/
+BONUS_SRCS_DIR  = ./src_bonus/
 
-MLX				= minilibx-linux
-MLX_LIB			= $(MLX)/libmlx_Linux.a
-MLX_FLAGS		= -L$(MLX) -lmlx_Linux -lX11 -lXext
+OBJ_DIR         = obj
+OBJ_DIR_BONUS	= obj_bonus
 
-MAKEFILE		= Makefile
+SRCS            = $(addprefix $(SRCS_DIR),\
+                core/so_long.c\
+                graphics/render_map.c graphics/set_images.c\
+                map_loader/init_map.c\
+                map_validation/check_map.c map_validation/is_valid_line.c map_validation/check_file.c map_validation/flood_fill.c\
+                player_movement/movement_actions.c player_movement/player_movement.c\
+                utils/close_game.c utils/error.c utils/free_memory.c)
 
-all: $(NAME)
+SRCS_BONUS      = $(addprefix $(BONUS_SRCS_DIR),\
+                core/so_long.c\
+                graphics/render_map.c graphics/set_images.c graphics/render_map_bonus.c graphics/set_image_bonus.c\
+                map_loader/init_map.c\
+                map_validation/add_collectible.c map_validation/check_map.c map_validation/is_valid_line.c map_validation/check_file.c map_validation/flood_fill.c\
+                player_movement/movement_actions.c player_movement/player_movement.c player_movement/utils.c\
+                utils/close_game.c utils/error.c utils/free_memory.c utils/mlx_destroy_img.c\
+                monster/projectile.c monster/monster.c monster/update_projectile.c)
 
-$(NAME): $(OBJS) $(LIBFLAGS) $(MLX_LIB) $(MAKEFILE)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFLAGS) $(MLX_FLAGS)
-	@printf "$(NAME)	$(GREEN)[OK]$(RESET)\n"
+OBJS            = $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)/%.o, $(SRCS))
+OBJS_BONUS      = $(patsubst $(BONUS_SRCS_DIR)%.c, $(OBJ_DIR_BONUS)/%.o, $(SRCS_BONUS))
 
-$(OBJ_DIR)/%.o: src/**/%.c $(MAKEFILE) $(HEADER)
-	@$(MKDIR) $(OBJ_DIR) $(DEP_DIR)
-	@$(CC) $(CFLAGS) -I./includes -I$(LIBFT) -I$(MLX) -c $< -o $@ -MF $(DEP_DIR)/$*.d
-	@printf "Compiling $<\n"
+INCLUDES        = -Iincludes -Iminilibx-linux -Ilibft
 
-$(LIBFLAGS): force
-	@$(MAKE) -C $(LIBFT)
+VPATH           = $(SRCS_DIR):$(BONUS_SRCS_DIR)
 
-$(MLX_LIB):
-	@$(MAKE) -C $(MLX)
+.PHONY: all clean fclean re bonus run run_bonus
+
+# Règle principale
+all: $(LIBFT) $(NAME)
+
+bonus: $(LIBFT) $(NAME_BONUS)
+
+# Compilation du programme principal
+$(NAME): $(OBJS) $(LIBFT) Makefile $(wildcard includes/*.h)
+	@$(CC) $(OBJS) $(LIBFT) $(STANDARD_FLAGS) $(MINILIBX_FLAGS) $(INCLUDES) -o $@
+	@echo "$(NAME): $(GREEN)$(NAME) was compiled.$(RESET)"
+
+# Compilation du programme bonus
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) Makefile $(wildcard includes/*.h)
+	@$(CC) $(OBJS_BONUS) $(LIBFT) $(STANDARD_FLAGS) $(MINILIBX_FLAGS) $(INCLUDES) -o $@
+	@echo "$(NAME): $(GREEN)$(NAME_BONUS) was compiled with Bonus.$(RESET)"
+
+# Compilation des fichiers objets principaux
+$(OBJ_DIR)/%.o: $(SRCS_DIR)%.c
+	@mkdir -p $(@D)
+	@echo "Compiling $<..."
+	@$(CC) -c $< -o $@ $(STANDARD_FLAGS) $(INCLUDES)
+
+$(OBJ_DIR_BONUS)/%.o: $(BONUS_SRCS_DIR)%.c
+	@mkdir -p $(@D)
+	@echo "Compiling $< for bonus..."
+	@$(CC) -c $< -o $@ $(STANDARD_FLAGS) $(INCLUDES)
+
+# Inclusion des dépendances générées
+$(NAME): $(OBJS) $(LIBFT) Makefile $(wildcard includes/*.h)
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) Makefile $(wildcard includes/*.h)
+
+
+# Compilation de la libft
+$(LIBFT): force
+	@make -s -C libft/
 
 force:
 
+# Nettoyage des fichiers objets et dépendances
 clean:
-	@$(RM) $(OBJ_DIR) $(DEP_DIR)
-	@$(MAKE) -C $(LIBFT) clean
-	@$(MAKE) -C $(MLX) clean
-	@printf "clean	$(GREEN)[OK]$(RESET)\n"
+	make clean -C libft
+	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR_BONUS)
+	@echo "Cleaned object files and dependencies."
 
+# Nettoyage complet (exécutables + objets + dépendances)
 fclean: clean
-	@$(RM) $(NAME)
-	@$(MAKE) -C $(LIBFT) fclean
-	@printf "fclean	$(GREEN)[OK]$(RESET)\n"
+	@$(REMOVE) $(NAME) $(NAME_BONUS)
+	@echo "$(NAME): ${RED}${NAME} and ${NAME_BONUS} were deleted${RESET}"
 
-re:	fclean all
+# Rebuild complet
+re: fclean all
 
-.PHONY: clean fclean all re force
+rebonus: fclean bonus
 
--include $(DEPS)
+# Exécution sans Valgrind (modifiez selon vos besoins)
+run: all
+	./$(NAME) assets/maps/valid/map5.ber
+
+run_bonus: bonus
+	./$(NAME_BONUS) assets/maps/bonus/map5.ber

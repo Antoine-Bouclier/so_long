@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:19:38 by abouclie          #+#    #+#             */
-/*   Updated: 2025/04/01 09:49:13 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:14:05 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,33 @@ void	is_wall_line(char *line, int *fd, t_game *game)
  * @param game Pointer to the game structure that
  * contains information about the map's elements.
  */
-static void	validate_map_elements(t_game *game)
+static void	validate_map_elements(t_game *game, int *fd)
 {
 	if (game->map.collectibles <= 0)
+	{
+		close(*fd);
 		error_msg("Your map must have at least 1 collectible", game);
+	}
 	else if (game->map.exit > 1)
+	{
+		close(*fd);
 		error_msg("Your map must have only 1 exit", game);
+	}
 	else if (game->map.exit < 1)
+	{
+		close(*fd);
 		error_msg("Your map must have atleast 1 exit", game);
+	}
 	else if (game->map.player > 1)
+	{
+		close(*fd);
 		error_msg("Your map must have only 1 player", game);
+	}
 	else if (game->map.player < 1)
+	{
+		close(*fd);
 		error_msg("Your map must have atleast 1 player", game);
+	}
 }
 
 /**
@@ -115,7 +130,7 @@ void	ft_check_map(const char *filename, int *fd, t_game *game)
 		free(line);
 		rows++;
 	}
-	validate_map_elements(game);
+	validate_map_elements(game, fd);
 }
 
 /**

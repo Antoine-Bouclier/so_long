@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/04/01 12:38:44 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/05 12:57:51 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_game
 	int				height;
 	int				img_width;
 	int				img_height;
-	int				moves;
+	unsigned int	moves;
 	int				map_alloc;
 	void			*mlx;
 	void			*win;

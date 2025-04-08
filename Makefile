@@ -6,6 +6,8 @@ RED             = \033[0;31m
 RESET           = \033[0m
 
 LIBFT           = ./libft/libft.a
+MLX				= minilibx-linux
+MLX_LIB			= minilibx-linux/libmlx_Linux.a
 
 CC              = cc
 
@@ -52,12 +54,12 @@ all: $(LIBFT) $(NAME)
 bonus: $(LIBFT) $(NAME_BONUS)
 
 # Compilation du programme principal
-$(NAME): $(OBJS) $(LIBFT) Makefile $(wildcard includes/*.h)
+$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
 	@$(CC) $(OBJS) $(LIBFT) $(STANDARD_FLAGS) $(MINILIBX_FLAGS) $(INCLUDES) -o $@
 	@echo "$(NAME): $(GREEN)$(NAME) was compiled.$(RESET)"
 
 # Compilation du programme bonus
-$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) Makefile $(wildcard includes/*.h)
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(MLX_LIB)
 	@$(CC) $(OBJS_BONUS) $(LIBFT) $(STANDARD_FLAGS) $(MINILIBX_FLAGS) $(INCLUDES) -o $@
 	@echo "$(NAME): $(GREEN)$(NAME_BONUS) was compiled with Bonus.$(RESET)"
 
@@ -73,19 +75,22 @@ $(OBJ_DIR_BONUS)/%.o: $(BONUS_SRCS_DIR)%.c
 	@$(CC) -c $< -o $@ $(STANDARD_FLAGS) $(INCLUDES)
 
 # Inclusion des dépendances générées
-$(NAME): $(OBJS) $(LIBFT) Makefile $(wildcard includes/*.h)
-$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) Makefile $(wildcard includes/*.h)
+$(NAME): $(OBJS) $(LIBFT)
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT)
 
+$(MLX_LIB):
+	@$(MAKE) -C $(MLX)
 
 # Compilation de la libft
 $(LIBFT): force
-	@make -s -C libft/
+	@make -s -C libft/ --no-print-directory
 
 force:
 
 # Nettoyage des fichiers objets et dépendances
 clean:
 	make clean -C libft
+	make clean -C minilibx-linux
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(OBJ_DIR_BONUS)
 	@echo "Cleaned object files and dependencies."
@@ -106,3 +111,6 @@ run: all
 
 run_bonus: bonus
 	./$(NAME_BONUS) assets/maps/bonus/map5.ber
+
+-include $(OBJS:.o=.d)
+-include $(OBJS_BONUS:.o=.d)

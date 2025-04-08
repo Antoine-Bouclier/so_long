@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:16:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/28 13:19:21 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:16:43 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	error_msg(char *msg, t_game *game)
 	{
 		ft_free_all_memory(game);
 	}
-	ft_printf("Error! %s\n", msg);
+	ft_printf("Error!\n%s\n", msg);
 	exit(EXIT_FAILURE);
 }

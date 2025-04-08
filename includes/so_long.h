@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/04/01 14:27:09 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/05 12:57:27 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,23 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	int			width;
-	int			height;
-	int			img_width;
-	int			img_height;
-	int			moves;
-	int			game_state;
-	int			error;
-	int			map_alloc;
-	void		*mlx;
-	void		*win;
-	t_entity	player;
-	t_entity	exit;
-	t_image		player_on_exit;
-	t_image		wall_img;
-	t_image		collectible_img;
-	t_image		floor_img;
-	t_map		map;
+	int				width;
+	int				height;
+	int				img_width;
+	int				img_height;
+	unsigned int	moves;
+	int				game_state;
+	int				error;
+	int				map_alloc;
+	void			*mlx;
+	void			*win;
+	t_entity		player;
+	t_entity		exit;
+	t_image			player_on_exit;
+	t_image			wall_img;
+	t_image			collectible_img;
+	t_image			floor_img;
+	t_map			map;
 }				t_game;
 
 /* Protoypes */

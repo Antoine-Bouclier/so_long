@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:40:54 by abouclie          #+#    #+#             */
-/*   Updated: 2025/04/05 12:57:51 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:25:05 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_map
 	int		heart_collected;
 	int		exit;
 	int		player;
+	int		first_line;
 }				t_map;
 
 typedef struct s_img

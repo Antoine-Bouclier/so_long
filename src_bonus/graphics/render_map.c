@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:42:45 by abouclie          #+#    #+#             */
-/*   Updated: 2025/04/01 10:37:35 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:33:08 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void	draw_first_line(t_game *game, t_position *pos, char current_char)
 			img_to_win(game, current_char, pos->x, pos->y);
 		current_char = game->map.full[pos->y][pos->x];
 		pos->x++;
+		game->map.first_line = 1;
 	}
 	pos->y++;
 }
@@ -95,12 +96,15 @@ static void	draw_map(t_game *game)
 	char		current_char;
 
 	pos.y = 0;
+	pos.x = 0;
+	current_char = game->map.full[pos.y][pos.x];
+	if (pos.y == 0 && game->map.first_line == 0)
+		draw_first_line(game, &pos, current_char);
+	pos.y = 1;
 	while (pos.y < game->map.rows)
 	{
 		pos.x = 0;
 		current_char = game->map.full[pos.y][pos.x];
-		if (pos.y == 0)
-			draw_first_line(game, &pos, current_char);
 		pos.x = 0;
 		while (pos.x < game->map.columns)
 		{

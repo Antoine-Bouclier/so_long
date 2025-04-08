@@ -6,7 +6,7 @@
 /*   By: abouclie <abouclie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:06:15 by abouclie          #+#    #+#             */
-/*   Updated: 2025/03/28 13:19:04 by abouclie         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:35:17 by abouclie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,6 @@ int	key_press(int keycode, t_game *game)
 		move_right(game, &current);
 	else if (keycode == ESC)
 		close_window(game);
+	game->map.first_line = 0;
 	return (0);
 }
